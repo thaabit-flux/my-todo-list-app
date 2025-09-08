@@ -31,7 +31,7 @@ const Edit3 = ({ size = 16 }) => (
 );
 
 export default class TodoApp extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       todos: [],
@@ -50,8 +50,7 @@ export default class TodoApp extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Save todos to localStorage whenever todos change
+  componentDidUpdate(prevProps: any, prevState: any) {
     if (prevState.todos !== this.state.todos) {
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
     }
@@ -148,7 +147,13 @@ export default class TodoApp extends Component {
       <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
-    
+
+            <div className="text-center mb-8">
+              <h1 className="text-5xl font-bold text-gray-800 mb-4 tracking-tight">
+                Todo<span className="text-indigo-600">.</span>
+              </h1>
+              <p className="text-gray-600 text-lg">Stay organized, stay productive</p>
+            </div>
             <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-gray-100">
               <div className="flex gap-3">
                 <div className="flex-1 relative">
@@ -219,7 +224,7 @@ export default class TodoApp extends Component {
             <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
               {filteredTodos.length === 0 ? (
                 <div className="p-12 text-center text-gray-500">
-            
+                  <div className="text-6xl mb-4">📝</div>
                   <h3 className="text-xl font-medium mb-2">No todos yet</h3>
                   <p>Add your first todo above to get started!</p>
                 </div>
@@ -233,7 +238,7 @@ export default class TodoApp extends Component {
                       }`}
                     >
                       <div className="flex items-center gap-4">
-        
+                        {/* Toggle Button */}
                         <button
                           onClick={() => this.toggleTodo(todo.id)}
                           className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
@@ -245,6 +250,7 @@ export default class TodoApp extends Component {
                           {todo.completed && <Check size={14} />}
                         </button>
 
+                        {/* Todo Text */}
                         <div className="flex-1">
                           {editingId === todo.id ? (
                             <div className="flex gap-2">
@@ -275,6 +281,7 @@ export default class TodoApp extends Component {
                           )}
                         </div>
 
+      
                         <div className="flex gap-2">
                           {!todo.completed && editingId !== todo.id && (
                             <button
@@ -297,7 +304,6 @@ export default class TodoApp extends Component {
                 </div>
               )}
             </div>
-
           </div>
         </div>
       </div>
