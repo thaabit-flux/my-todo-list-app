@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    experimental: {
+    turbo: process.env.NODE_ENV === 'development' ? {} : undefined
+  }
 };
 
 export default nextConfig;
