@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev --turbopack",
-    "start": "next start"
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build",
+    "dev": "next dev",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "react": "19.1.0",

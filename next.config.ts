@@ -4,7 +4,9 @@ const nextConfig: NextConfig = {
     experimental: {
     turbo: process.env.NODE_ENV === 'development' ? {} : undefined
   },
-  telemetry: false,
+    eslint: {
+    ignoreDuringBuilds: false,
+  },
 };
 
 export default nextConfig;
