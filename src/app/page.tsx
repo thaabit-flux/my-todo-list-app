@@ -50,7 +50,8 @@ export default class TodoApp extends Component {
     }
   }
 
-  componentDidUpdate(prevProps: any, prevState: any) {
+  componentDidUpdate(prevProps: {}, prevState: TodoState) {
+    // Save todos to localStorage whenever todos change
     if (prevState.todos !== this.state.todos) {
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
     }
@@ -147,13 +148,15 @@ export default class TodoApp extends Component {
       <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto">
-
+            {/* Header */}
             <div className="text-center mb-8">
               <h1 className="text-5xl font-bold text-gray-800 mb-4 tracking-tight">
                 Todo<span className="text-indigo-600">.</span>
               </h1>
               <p className="text-gray-600 text-lg">Stay organized, stay productive</p>
             </div>
+
+            {/* Add Todo Input */}
             <div className="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-gray-100">
               <div className="flex gap-3">
                 <div className="flex-1 relative">
@@ -176,6 +179,7 @@ export default class TodoApp extends Component {
               </div>
             </div>
 
+            {/* Stats and Filters */}
             <div className="bg-white rounded-2xl shadow-xl mb-8 border border-gray-100">
               <div className="p-6">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -203,6 +207,7 @@ export default class TodoApp extends Component {
                   )}
                 </div>
 
+                {/* Filter Buttons */}
                 <div className="flex gap-2">
                   {['all', 'active', 'completed'].map((filterType) => (
                     <button
@@ -221,6 +226,7 @@ export default class TodoApp extends Component {
               </div>
             </div>
 
+            {/* Todo List */}
             <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
               {filteredTodos.length === 0 ? (
                 <div className="p-12 text-center text-gray-500">
@@ -230,7 +236,7 @@ export default class TodoApp extends Component {
                 </div>
               ) : (
                 <div className="divide-y divide-gray-100">
-                  {filteredTodos.map((todo, index) => (
+                  {filteredTodos.map((todo) => (
                     <div
                       key={todo.id}
                       className={`p-4 transition-all duration-200 hover:bg-gray-50 ${
@@ -281,7 +287,7 @@ export default class TodoApp extends Component {
                           )}
                         </div>
 
-      
+                        {/* Action Buttons */}
                         <div className="flex gap-2">
                           {!todo.completed && editingId !== todo.id && (
                             <button
@@ -303,6 +309,11 @@ export default class TodoApp extends Component {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* Footer */}
+            <div className="text-center mt-8 text-gray-500">
+              <p>Double-click to edit • Enter to save • Built with React & Tailwind</p>
             </div>
           </div>
         </div>
